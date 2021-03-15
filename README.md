@@ -2,7 +2,7 @@
 
 [Descripción breve del proyecto a realizar (2-3 frases).]
 
-## Álvaro Martín @AlvaroMartin3, Jorge Marquez @JorgemarquezUPM, Marcos Mariblanca @MarcosML02
+## Álvaro Martín @AlvaroMartin3, Jorge Marquez @JorgemarquezUPM, Marcos Mariblanca @MarcosML02, Jesus Marin Delgado @jesuppedia.
 
 [Nombres, apellidos, y usuario GitHub de los integrantes del equipo.]
 
