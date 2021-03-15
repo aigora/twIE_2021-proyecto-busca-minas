@@ -9,4 +9,4 @@
 ## Vamos a realizar una versión "lite" del clásico buscaminas.
 
 [Lista de los objetivos que se persiguen con el trabajo propuesto.]
-## Seguir dando importancia a este tipo de juegos
+## Pretendemos que este programa coloque en un tablero una serie de objetivos para que el jugador, mediante pistas numericas, halle su lugar, si el usuario descubre una mina sin marcar su posicion perdera.
