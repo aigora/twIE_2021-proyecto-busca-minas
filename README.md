@@ -2,10 +2,10 @@
 
 ## Vamos a realizar una versión "lite" del clásico buscaminas.
 
-## Álvaro Martín @AlvaroMartin3 
-## Jorge Marquez @JorgemarquezUPM
-## Marcos Mariblanca @MarcosML02 
-## Jesus Marin Delgado @jesuppedia
+### Álvaro Martín @AlvaroMartin3 
+### Jorge Marquez @JorgemarquezUPM
+### Marcos Mariblanca @MarcosML02 
+### Jesus Marin Delgado @jesuppedia
 
 # Objetivos
 
