@@ -12,10 +12,35 @@ int main()
 
         switch(opcion)
         {
-            case 1:
-                break;
+            case 1: do
+    {
+        printf( "Seleccione un modo de juego \n" );
+        printf( "Normal [1], Maratón [2] \n" );
+
+        scanf ("%d", &opcion);
+
+        switch(opcion)
+        {
+            case 1: do
+            {
+              printf ("estamos trabajando en ello \n");
+            }
+            while (opcion!=1);
+             break;
+
+            case 2: do
+            {
+               printf ("estamos trabajando en ello \n");
+            }
+            while (opcion!=2);
+
         }
-    } while (opcion!=2);
+    } while (opcion!=1);
+
+
+        }
+
+} while (opcion!=2);
 
     return 0;
 }
