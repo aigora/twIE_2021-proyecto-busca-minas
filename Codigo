@@ -1,6 +1,8 @@
 #include <stdio.h>
 int main()
 {
+    FILE *buscaminas;
+    buscaminas = fopen("buscaminas.c","a");
     int n, opcion;
 
     do
@@ -41,6 +43,6 @@ int main()
         }
 
 } while (opcion!=2);
-
+   fclose (buscaminas);
     return 0;
 }
