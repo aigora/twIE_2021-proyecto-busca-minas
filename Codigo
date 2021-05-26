@@ -1,4 +1,23 @@
 #include <stdio.h>
+#include <assert.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+void colocarMina(int fila, int columna, char tablero[F][C]) {
+  tablero[fila][columna] = M;
+}
+void colocarMinasAleatoriamente(char tablero[F][C]) {
+  int l;
+  for (l = 0; l < MINAS; l++) {
+    int fila = Rango(0, F - 1);  //esto hace que se coloquen de forma aleatoria y no siempre tengas el mismo juego
+    int columna = Rango(0, C - 1);
+    colocarMina(fila, columna, tablero);
+  }
+}
+
+
 int main()
 {
     FILE *buscaminas;
