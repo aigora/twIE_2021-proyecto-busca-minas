@@ -17,51 +17,89 @@ void colocarMinasAleatoriamente(char tablero[F][C]) {
   }
 }
 
+int MinasCerca(int fila, int columna, char tablero[F][C]) {
+  int recuento = 0, FInicio, FFin, CInicio, CFin;
+  if (fila <= 0) {
+    FInicio = 0;
+  } else {
+    FInicio = fila - 1;
+  }
 
-int main()
+  if (columna <= 0) {
+    CInicio = 0;
+  } else {
+    CInicio = columna - 1;
+  }
+  if (fila + 1 >= F) {
+    FFin = F - 1;
+  } else {
+    FFin = fila + 1;
+  }
+  int b;
+  for (b = FInicio; b <= FFin; b++) {
+    int l;
+    for (l = C; l <= CFin; l++) {
+      if (tablero[b][l] == M) {
+        recuento++;
+      }
+    }
+  }
+  if (columna + 1 >= C) {
+    CFin = C - 1;
+  } else {
+    CFin = columna + 1;
+  }
+  return recuento;
+}
+
+int main (){
+int n;
+ system("color 05");
+printf("bienvenido al buscaminas multicolor, ¿quiere jugar? si[2], no[1]\n");
+scanf("%d", &n);
+if (n % 2 == 0){
+  char tablero[F][C];
+  int deberiaMostrarMinas = 0;
+
+  srand(getpid());
+  iniciarTablero(tablero);
+  colocarMinasAleatoriamente(tablero);
+  // Este ciclo es infinito, menos para cuando ganes, o encuentres una mina y pierdas.
+  while (1) {
+    imprimirTablero(tablero, deberiaMostrarMinas);
+    if (deberiaMostrarMinas) {
+      break;
+    }
+    int columna;
+    char fila;
+     system("color 09");
+    printf("Dinos la columna: ");
+    scanf("%d", &columna);
+     system("color 06");
+    printf("Dinos la fila:");
+    scanf(" %c", &fila);
+    int status = abrirCasilla(fila, columna, tablero);
+    if (nohayCasillascerradas(tablero))
+    {
+      system("color 03");
+      printf("Has ganado, enhorabuena\n");
+      deberiaMostrarMinas = 1;
+    }
+    else if (status == FALLO_ESPACIO_DESCUBIERTO)
+    {
+      printf("Ya has abierto esta casilla\n");
+    }
+    else if (status == FALLO_MINA) {
+      printf("Has perdido\n");
+      deberiaMostrarMinas = 1;
+    }
+  }
+}
+else
 {
-    FILE *buscaminas;
-    buscaminas = fopen("buscaminas.c","a");
-    int n, opcion;
+printf("hasta la proxima");
 
-    do
-    {
-        printf( "Bienvenido al buscaminas, ¿quiere jugar? \n" );
-        printf( "si quiero [1], no quiero [2] \n" );
+}
 
-        scanf ("%d", &opcion);
-
-        switch(opcion)
-        {
-            case 1: do
-    {
-        printf( "Seleccione un modo de juego \n" );
-        printf( "Normal [1], Maratón [2] \n" );
-
-        scanf ("%d", &opcion);
-
-        switch(opcion)
-        {
-            case 1: do
-            {
-              printf ("estamos trabajando en ello \n");
-            }
-            while (opcion!=1);
-             break;
-
-            case 2: do
-            {
-               printf ("estamos trabajando en ello \n");
-            }
-            while (opcion!=2);
-
-        }
-    } while (opcion!=1);
-
-
-        }
-
-} while (opcion!=2);
-   fclose (buscaminas);
-    return 0;
+return 0;
 }
