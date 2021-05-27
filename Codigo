@@ -1,4 +1,12 @@
-#define VACIO '.'
+#include <assert.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+#define ESPACIO_DESCUBIERTO ' '
+#define FALLO_ESPACIO_DESCUBIERTO 2
+#define VACIO '-'
 #define C 10
 #define F 7
 #define M '#'
@@ -164,6 +172,11 @@ int nohayCasillascerradas(char tablero[F][C]) {
   return 1;
 }
 int main (){
+FILE * pf2;
+FILE * pf;
+pf2 = fopen ("fichero.csv","a");
+pf2 = fopen ("fichero.csv","r");
+pf=fopen("buscaminas.c","a");
 int n;
  system("color 05");
 printf("bienvenido al buscaminas multicolor, ¿quiere jugar? si[2], no[1]\n");
@@ -211,7 +224,7 @@ else
 printf("hasta la proxima");
 
 }
-
+fclose(pf);
+fclose(pf2);
 return 0;
 }
-
