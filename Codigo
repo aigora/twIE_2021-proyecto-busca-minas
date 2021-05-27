@@ -1,9 +1,14 @@
-#include <stdio.h>
-#include <assert.h>
-#include <stdio.h>
-#include <ctype.h>
-#include <unistd.h>
-#include <stdlib.h>
+#define VACIO '.'
+#define C 10
+#define F 7
+#define M '#'
+#define MINAS \
+25
+#define FALLO_MINA 1
+#define FALLO_NO 3
+#define DEBUG 0
+
+
 
 void colocarMina(int fila, int columna, char tablero[F][C]) {
   tablero[fila][columna] = M;
@@ -11,12 +16,11 @@ void colocarMina(int fila, int columna, char tablero[F][C]) {
 void colocarMinasAleatoriamente(char tablero[F][C]) {
   int l;
   for (l = 0; l < MINAS; l++) {
-    int fila = Rango(0, F - 1);  //esto hace que se coloquen de forma aleatoria y no siempre tengas el mismo juego
+    int fila = Rango(0, F - 1);
     int columna = Rango(0, C - 1);
     colocarMina(fila, columna, tablero);
   }
 }
-
 int MinasCerca(int fila, int columna, char tablero[F][C]) {
   int recuento = 0, FInicio, FFin, CInicio, CFin;
   if (fila <= 0) {
@@ -51,7 +55,114 @@ int MinasCerca(int fila, int columna, char tablero[F][C]) {
   }
   return recuento;
 }
-
+int Rango(int min, int max) {
+  return min + rand() / (RAND_MAX / (max - min + 1) + 1);
+}
+void iniciarTablero(char tablero[F][C]) {
+  int l;
+  for (l = 0; l < F; l++) {
+    int m;
+    for (m = 0; m < C; m++) {
+      tablero[l][m] = VACIO;
+    }
+  }
+}
+void Encabezado() {
+  int a;
+  for (a = 0; a <= C; a++) {
+    system("color 02");
+    printf("____");   //esto es simplemente para que se vea algo bonito
+    if (a + 2 == C) {     //y separar filas y columnas mejor, si no todo seria un monton de puntos
+      printf("_");
+    }
+  }
+  printf("\n");
+}
+void Filas() {
+  int a;
+  for (a = 0; a <= C; a++) {
+    system("color 03");
+    printf("____");
+    if (a == C) {
+      printf("|");
+    }
+  }
+  printf("\n");
+}
+void mostrarEncabezado() {
+  Encabezado();
+  printf("|   ");
+  int l;
+  for (l = 0; l < C; l++) {
+    printf("| %d ", l + 1);
+    if (l + 1 == C) {
+      system("color 05");
+      printf("|");
+    }
+  }
+  printf("\n");
+}
+char enteroACaracter(int numero) {
+  return numero + '0';
+}
+void imprimirTablero(char tablero[F][C], int debedehaberMinas) {
+  mostrarEncabezado();
+  Encabezado();
+  char letra = 'A';
+  int l;
+  for (l = 0; l < F; l++) {
+    int m;
+    printf("| %c ", letra);
+    letra++;
+    for (m = 0; m < C; m++) {
+      char letraverdadera = VACIO;
+      char letraActual = tablero[l][m];
+      if (letraActual == M) {
+        letraverdadera = VACIO;
+      } else if (letraActual == ESPACIO_DESCUBIERTO) {
+        int minasCerca = MinasCerca(l, m, tablero);
+        letraverdadera = enteroACaracter(minasCerca);
+      }
+      if (letraActual == M && (DEBUG || debedehaberMinas)) {
+        letraverdadera = M;
+      }
+      printf("| %c ", letraverdadera);
+      if (m + 1 == C) {
+        printf("|");
+      }
+    }
+    printf("\n");
+    Filas();
+  }
+}
+int abrirCasilla(char filaLetra, int columna, char tablero[F][C]) {
+  filaLetra = toupper(filaLetra);
+  columna--;
+  int fila = filaLetra - 'A';
+  assert(columna < C && columna >= 0);
+  assert(fila < F && fila >= 0);
+  if (tablero[fila][columna] == M) {
+    return FALLO_MINA;
+  }
+  if (tablero[fila][columna] == ESPACIO_DESCUBIERTO) {
+    return FALLO_ESPACIO_DESCUBIERTO;
+  }
+  tablero[fila][columna] = ESPACIO_DESCUBIERTO;
+  return FALLO_NO;
+}
+int nohayCasillascerradas(char tablero[F][C]) {
+  int l;
+  for (l = 0; l < F; l++) {
+    int c;
+    for (c = 0; c < C; c++) {
+      char actual = tablero[l][c];
+      if (actual == VACIO) {
+        return 0;
+      }
+    }
+  }
+  return 1;
+}
 int main (){
 int n;
  system("color 05");
@@ -103,3 +214,4 @@ printf("hasta la proxima");
 
 return 0;
 }
+
